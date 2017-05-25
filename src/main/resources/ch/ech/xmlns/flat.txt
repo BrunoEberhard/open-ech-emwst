@@ -1,0 +1,18 @@
+	<xs:complexType name="flatTaxRateMethodType">
+		<xs:sequence>
+			<xs:element name="suppliesPerTaxRate" type="eCH-0217:activityTurnoverTaxRateType" minOccurs="0" maxOccurs="100"/>
+			<xs:element name="acquisitionTax" type="eCH-0217:turnoverTaxRateType" minOccurs="0" maxOccurs="100"/>
+			<xs:choice>
+				<xs:element name="compilationCompensationExport" type="eCH-0217:compilationCompensationExportType" minOccurs="0"/>
+				<xs:element name="compensationExport" type="eCH-0217:amountType" minOccurs="0"/>
+			</xs:choice>
+			<xs:choice>
+				<xs:element name="compilationDeemedInputTaxDeduction" type="eCH-0217:compilationDeemedInputTaxDeductionType" minOccurs="0"/>
+				<xs:element name="deemedInputTaxDeduction" type="eCH-0217:amountType" minOccurs="0"/>
+			</xs:choice>
+			<xs:choice>
+				<xs:element name="compilationMarginTaxation" type="eCH-0217:compilationMarginTaxationType" minOccurs="0"/>
+				<xs:element name="marginTaxation" type="eCH-0217:amountType" minOccurs="0"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>

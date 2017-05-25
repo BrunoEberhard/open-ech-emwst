@@ -1,0 +1,6 @@
+Abbildung 2: compilationDeemedInputTax-DeductionType (Bindestrich)
+
+Zeile 3: namespace/targetnamespace ist ech statt eCH wie die anderen Standards
+Zeile 70: amountType: Fehlende Grösse
+Zeile 85: descriptionVariousDeduction: Länge fehlt
+Zeile 96, 103, 105: fehlende Grösse
