@@ -13,7 +13,7 @@ public class FlatTaxRateMethod {
 
 	public Object id;
 
-	public final List<ActivityTurnoverTaxRate> suppliesPerTaxRate = new ArrayList<>();
+	public final List<TurnoverTaxRate> suppliesPerTaxRate = new ArrayList<>();
 	public final List<TurnoverTaxRate> acquisitionTax = new ArrayList<>();
 
 	@Size(18)

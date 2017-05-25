@@ -12,7 +12,6 @@ import org.minimalj.model.properties.PropertyInterface;
 import org.minimalj.util.CloneHelper;
 import org.minimalj.util.StringUtils;
 
-import ch.openech.model.emwst.ActivityTurnoverTaxRate;
 import ch.openech.model.emwst.CompilationCompensationExport;
 import ch.openech.model.emwst.CompilationDeemedInputTaxDeduction;
 import ch.openech.model.emwst.CompilationMarginTaxation;
@@ -62,9 +61,9 @@ public class VATDeclarationEditModel {
 	
 	// all
 	
-	public ActivityTurnoverTaxRate suppliesPerTaxRate0 = new ActivityTurnoverTaxRate();
-	public ActivityTurnoverTaxRate suppliesPerTaxRate1 = new ActivityTurnoverTaxRate();
-	public ActivityTurnoverTaxRate suppliesPerTaxRate2 = new ActivityTurnoverTaxRate();
+	public TurnoverTaxRate suppliesPerTaxRate0 = new TurnoverTaxRate();
+	public TurnoverTaxRate suppliesPerTaxRate1 = new TurnoverTaxRate();
+	public TurnoverTaxRate suppliesPerTaxRate2 = new TurnoverTaxRate();
 	
 	public TurnoverTaxRate acquisitionTax0 = new TurnoverTaxRate();
 	public TurnoverTaxRate acquisitionTax1 = new TurnoverTaxRate();
@@ -109,8 +108,6 @@ public class VATDeclarationEditModel {
 		for (Object o : list) {
 			if (o == null) {
 				continue;
-			} else if (activity && o instanceof TurnoverTaxRate) {
-				o = convert((TurnoverTaxRate) o);
 			}
 			PropertyInterface editModelProperty = Properties.getProperty(this.getClass(), fieldName + i);
 			editModelProperty.setValue(this, o);
@@ -126,8 +123,6 @@ public class VATDeclarationEditModel {
 			Object o = editModelProperty.getValue(this);
 			if (o == null) {
 				continue;
-			} else if (!activity && o instanceof ActivityTurnoverTaxRate) {
-				o = convert((ActivityTurnoverTaxRate) o);
 			}
 			list.add(o);
 		}
@@ -170,17 +165,4 @@ public class VATDeclarationEditModel {
 		return vatDeclaration;
 	}
 
-	private TurnoverTaxRate convert(ActivityTurnoverTaxRate rate) {
-		TurnoverTaxRate result = new TurnoverTaxRate();
-		result.taxRate = rate.taxRate;
-		result.turnover = rate.turnover;
-		return result;
-	}
-
-	private ActivityTurnoverTaxRate convert(TurnoverTaxRate rate) {
-		ActivityTurnoverTaxRate result = new ActivityTurnoverTaxRate();
-		result.taxRate = rate.taxRate;
-		result.turnover = rate.turnover;
-		return result;
-	}
 }
