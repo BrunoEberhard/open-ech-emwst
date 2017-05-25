@@ -72,6 +72,8 @@ public class StaxEch0217 {
 					return (T) EnumUtils.valueList((Class<Enum>) clazz).get(value - 1);
 				} else if (clazz == BigDecimal.class) {
 					return (T) new BigDecimal(StaxEch.token(xml));
+				} else if (clazz == String.class) {
+					return (T) StaxEch.token(xml);
 				}
 				object = CloneHelper.newInstance(clazz);
 				break;
