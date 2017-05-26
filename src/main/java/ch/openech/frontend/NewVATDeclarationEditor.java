@@ -1,6 +1,7 @@
 package ch.openech.frontend;
 
 import java.text.MessageFormat;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import org.minimalj.backend.Backend;
@@ -30,6 +31,10 @@ public class NewVATDeclarationEditor extends Editor<VATDeclarationEditModel, VAT
 	@Override
 	protected VATDeclarationEditModel createObject() {
 		VATDeclarationEditModel declaration = new VATDeclarationEditModel(reportingMethod);
+		declaration.generalInformation.sendingApplication.manufacturer = "Open Ech";
+		declaration.generalInformation.sendingApplication.product = "Open Ech - E-MWST";
+		declaration.generalInformation.sendingApplication.productVersion = "1.0.0";
+		declaration.generalInformation.generationTime = LocalDateTime.now();
 		return declaration;
 	}
 	
