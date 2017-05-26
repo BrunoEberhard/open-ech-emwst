@@ -15,11 +15,8 @@ import org.minimalj.util.StringUtils;
 import ch.openech.model.emwst.CompilationCompensationExport;
 import ch.openech.model.emwst.CompilationDeemedInputTaxDeduction;
 import ch.openech.model.emwst.CompilationMarginTaxation;
-import ch.openech.model.emwst.EffectiveReportingMethod;
-import ch.openech.model.emwst.FlatTaxRateMethod;
 import ch.openech.model.emwst.GeneralInformation;
 import ch.openech.model.emwst.GrossOrNet;
-import ch.openech.model.emwst.NetTaxRateMethod;
 import ch.openech.model.emwst.OtherFlowsOfFunds;
 import ch.openech.model.emwst.TurnoverComputation;
 import ch.openech.model.emwst.TurnoverTaxRate;
@@ -84,8 +81,8 @@ public class VATDeclarationEditModel {
 		Object method = declaration.getReportingMethod();
 		this.clazz = method.getClass();
 
-		convertToEditModel(method, "suppliesPerTaxRate", true);
-		convertToEditModel(method, "acquisitionTax", false);
+		convertToEditModel(method, "suppliesPerTaxRate");
+		convertToEditModel(method, "acquisitionTax");
 		
 		for (PropertyInterface myProperty : Properties.getProperties(this.getClass()).values()) {
 			for (PropertyInterface methodProperty : Properties.getProperties(method.getClass()).values()) {
@@ -102,7 +99,7 @@ public class VATDeclarationEditModel {
 		CloneHelper.deepCopy(declaration.turnoverComputation, this.turnoverComputation);
 	}
 
-	private void convertToEditModel(Object reportingMethod, String fieldName, boolean activity) {
+	private void convertToEditModel(Object reportingMethod, String fieldName) {
 		List list = (List) Properties.getProperty(reportingMethod.getClass(), fieldName).getValue(reportingMethod);
 		int i = 0;
 		for (Object o : list) {
@@ -115,7 +112,7 @@ public class VATDeclarationEditModel {
 		}
 	}
 
-	private void convertToModel(Object reportingMethod, String fieldName, boolean activity) {
+	private void convertToModel(Object reportingMethod, String fieldName) {
 		List list = (List) Properties.getProperty(reportingMethod.getClass(), fieldName).getValue(reportingMethod);
 		list.clear();
 		for (int i = 0; i<3; i++) {
@@ -134,19 +131,11 @@ public class VATDeclarationEditModel {
 
 	// EditModel -> Model
 	public VATDeclaration convertToModel() {
-		VATDeclaration vatDeclaration = new VATDeclaration();
-		
-		if (clazz == FlatTaxRateMethod.class) {
-			vatDeclaration.flatTaxRateMethod = new FlatTaxRateMethod();
-		} else if (clazz == EffectiveReportingMethod.class) {
-			vatDeclaration.effectiveReportingMethod = new EffectiveReportingMethod();
-		} else if (clazz == NetTaxRateMethod.class) {
-			vatDeclaration.netTaxRateMethod = new NetTaxRateMethod();
-		}
-		Object method = vatDeclaration.getReportingMethod();
+		VATDeclaration vatDeclaration = new VATDeclaration(clazz);
 
-		convertToModel(method, "suppliesPerTaxRate", true);
-		convertToModel(method, "acquisitionTax", false);
+		Object method = vatDeclaration.getReportingMethod();
+		convertToModel(method, "suppliesPerTaxRate");
+		convertToModel(method, "acquisitionTax");
 		
 		for (PropertyInterface myProperty : Properties.getProperties(this.getClass()).values()) {
 			for (PropertyInterface methodProperty : Properties.getProperties(method.getClass()).values()) {
