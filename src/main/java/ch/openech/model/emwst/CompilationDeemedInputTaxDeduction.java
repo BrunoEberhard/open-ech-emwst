@@ -7,6 +7,6 @@ public class CompilationDeemedInputTaxDeduction {
 
 	public Object id;
 	
-	public List<VerificationCompensationExport> verificationCompensationExport = 
+	public List<VerificationDeemedInputTaxDeduction> verificationDeemedInputTaxDeduction = 
 			new ArrayList<>();
 }

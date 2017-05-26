@@ -23,6 +23,22 @@ public class VATDeclaration {
 	
 	public OtherFlowsOfFunds otherFlowsOfFunds;
 
+	public VATDeclaration() {
+		//
+	}
+	
+	public VATDeclaration(Class<?> reportingMethod) {
+		if (reportingMethod == FlatTaxRateMethod.class) {
+			flatTaxRateMethod = new FlatTaxRateMethod();
+		} else if (reportingMethod == EffectiveReportingMethod.class) {
+			effectiveReportingMethod = new EffectiveReportingMethod();
+		} else if (reportingMethod == NetTaxRateMethod.class) {
+			netTaxRateMethod = new NetTaxRateMethod();
+		} else {
+			throw new IllegalArgumentException(reportingMethod.getName());
+		}
+	}
+	
 	public Object getReportingMethod() {
 		if (effectiveReportingMethod != null) {
 			return effectiveReportingMethod;
