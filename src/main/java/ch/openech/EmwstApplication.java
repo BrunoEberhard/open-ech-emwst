@@ -19,9 +19,7 @@
 package ch.openech;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.minimalj.application.Application;
 import org.minimalj.application.Configuration;
@@ -38,13 +36,10 @@ import ch.openech.model.emwst.VATDeclaration;
 
 public class EmwstApplication extends Application {
 
-	@Override
-	protected Set<String> getResourceBundleNames() {
-		Set<String> resourceBundleNames = new HashSet<>();
-		resourceBundleNames.add(this.getClass().getName());
-		resourceBundleNames.add(this.getClass().getName() + "_xml");
-		// resourceBundleNames.add("OpenEch");
-		return resourceBundleNames;
+	public EmwstApplication() {
+		if (!Configuration.available("MjRepository")) {
+			Configuration.set("MjRepository", InMemoryRepository.class.getName());
+		}
 	}
 	
 	@Override
@@ -63,9 +58,6 @@ public class EmwstApplication extends Application {
 	}
 	
 	public static void main(String[] args) {
-		if (!Configuration.available("MjRepository")) {
-			Configuration.set("MjRepository", InMemoryRepository.class.getName());
-		}
 		NanoWebServer.start(new EmwstApplication());
 		// Swing.start(new EmwstApplication());
 	}
