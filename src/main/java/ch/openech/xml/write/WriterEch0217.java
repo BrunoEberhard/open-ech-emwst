@@ -272,7 +272,7 @@ public class WriterEch0217 extends WriterElement {
 
 	public static String writeToString(VATDeclaration taxStatement) {
 		StringWriter stringWriter = new StringWriter();
-		WriterEch0217 w = new WriterEch0217(stringWriter, EchSchema.getNamespaceContext(196, "1.0"));
+		WriterEch0217 w = new WriterEch0217(stringWriter, EchSchema.getNamespaceContext(217, "1.0"));
 		w.write(taxStatement);
 		return stringWriter.toString();
 	}
