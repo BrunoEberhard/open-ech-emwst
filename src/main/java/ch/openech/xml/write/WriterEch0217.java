@@ -131,7 +131,7 @@ public class WriterEch0217 extends WriterElement {
 	}
 	
 	private void turnoverTaxRate(WriterElement parent, String tag, TurnoverTaxRate turnoverTaxRate, boolean activity) throws Exception {
-		if (turnoverTaxRate != null) {
+		if (turnoverTaxRate != null && turnoverTaxRate.turnover != null && turnoverTaxRate.turnover.signum() != 0) {
 			WriterElement w = parent.create(URI, tag);
 			if (activity) {
 				w.values(turnoverTaxRate, ACTIVITY);
