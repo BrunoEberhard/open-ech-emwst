@@ -15,39 +15,47 @@ public class VATDeclarationForm extends Form<VATDeclarationEditModel> {
 		super(editable, 4);
 
 		addTitle(Resources.getString("GeneralInformation"));
-		line($.generalInformation.uid.value, $.generalInformation.organisationName);
-		line($.generalInformation.reportingPeriodFrom, $.generalInformation.reportingPeriodTill);
-		line($.generalInformation.typeOfSubmission, $.generalInformation.formOfReporting);
-		line($.generalInformation.businessReferenceId);
+		if (reportingMethod == EffectiveReportingMethod.class) {
+			line($.generalInformation.organisationName, $.generalInformation.uid.value, $.generalInformation.businessReferenceId, $.grossOrNet);
+		} else {
+			line($.generalInformation.organisationName, $.generalInformation.uid.value, $.generalInformation.businessReferenceId);
+		}
+		line($.generalInformation.reportingPeriodFrom, $.generalInformation.reportingPeriodTill, $.generalInformation.typeOfSubmission, $.generalInformation.formOfReporting);
 
 		addTitle(Resources.getString("TurnoverComputation"));
 		line($.turnoverComputation.totalConsideration);
-		line($.turnoverComputation.suppliesToForeignCountries, $.turnoverComputation.suppliesAbroad);
-		line($.turnoverComputation.transferNotificationProcedure);
-		line($.turnoverComputation.suppliesExemptFromTax);
-		line($.turnoverComputation.reductionOfConsideration);
-		line($.turnoverComputation.variousDeduction.amountVariousDeduction, $.turnoverComputation.variousDeduction.descriptionVariousDeduction);
-
+		line($.turnoverComputation.suppliesAbroad, $.turnoverComputation.suppliesToForeignCountries, $.turnoverComputation.transferNotificationProcedure);
+		line($.turnoverComputation.suppliesExemptFromTax,$.turnoverComputation.reductionOfConsideration, $.turnoverComputation.variousDeduction.amountVariousDeduction, $.turnoverComputation.variousDeduction.descriptionVariousDeduction);
 		if (reportingMethod == EffectiveReportingMethod.class) {
-			line($.grossOrNet);
 			line($.opted);
+		} else {
+			
 		}
 		
-		addTitle(Resources.getString("SuppliesPerTaxRate"));
+		addTitle("Steuerberechnung");
 		if (reportingMethod == FlatTaxRateMethod.class) {
 			line($.suppliesPerTaxRate0.taxRate, $.suppliesPerTaxRate0.turnover, $.suppliesPerTaxRate0.activity);
 			line($.suppliesPerTaxRate1.taxRate, $.suppliesPerTaxRate1.turnover, $.suppliesPerTaxRate1.activity);
+			line($.suppliesPerTaxRate2.taxRate, $.suppliesPerTaxRate2.turnover, $.suppliesPerTaxRate2.activity);
 		} else {
 			line($.suppliesPerTaxRate0.taxRate, $.suppliesPerTaxRate0.turnover);
-			line($.suppliesPerTaxRate1.taxRate, $.suppliesPerTaxRate1.turnover);
+			// line($.suppliesPerTaxRate0.taxRate, $.suppliesPerTaxRate0.turnover, new TextFormElement($.suppliesPerTaxRate0.getResult()));
 		}
 
 		addTitle(Resources.getString("AcquisitionTax"));
 		line($.acquisitionTax0.taxRate, $.acquisitionTax0.turnover);
-		line($.acquisitionTax1.taxRate, $.acquisitionTax1.turnover);
 
-		addTitle("-");
+		if (reportingMethod == EffectiveReportingMethod.class) {
+			addTitle("Vorsteuern");
+			line($.inputTaxMaterialAndServices, $.inputTaxInvestments, $.subsequentInputTaxDeduction);
+			addTitle("Vorsteuerkorrekturen/ -kürzungen");
+			line($.inputTaxCorrections, $.inputTaxReductions);
+		}
+
 		line($.payableTax);
+
+		addTitle("Andere Mittelflüsse (Art. 18 Abs. 2)");
+		line($.otherFlowsOfFunds.subsidies, $.otherFlowsOfFunds.donations);
 		
 		addTitle(Resources.getString("TechnicalInformation"));
 		SendingApplication $_application = $.generalInformation.sendingApplication;
