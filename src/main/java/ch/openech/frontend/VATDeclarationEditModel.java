@@ -34,7 +34,7 @@ public class VATDeclarationEditModel {
 	// effective
 
 	@NotEmpty
-	public GrossOrNet grossOrNet;
+	public GrossOrNet grossOrNet = GrossOrNet.Brutto;
 	@Size(18) @Decimal(2)
 	public BigDecimal opted;
 	
