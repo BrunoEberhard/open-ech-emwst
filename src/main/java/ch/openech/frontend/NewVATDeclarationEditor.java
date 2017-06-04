@@ -1,10 +1,7 @@
 package ch.openech.frontend;
 
-import java.text.MessageFormat;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
-import org.minimalj.backend.Backend;
 import org.minimalj.frontend.Frontend;
 import org.minimalj.frontend.editor.Editor;
 import org.minimalj.frontend.form.Form;
@@ -23,18 +20,14 @@ public class NewVATDeclarationEditor extends Editor<VATDeclarationEditModel, VAT
 	}
 
 	private static String getName(Class<?> reportingMethod) {
-		String resourceName = Resources.getString(NewObjectEditor.class);
-		String classText = Resources.getResourceName(reportingMethod);
-		return MessageFormat.format(resourceName, classText);
+		return Resources.getString("NewVATDeclarationEditor." + reportingMethod.getSimpleName());
 	}
 
 	@Override
 	protected VATDeclarationEditModel createObject() {
 		VATDeclarationEditModel declaration = new VATDeclarationEditModel(reportingMethod);
-		declaration.generalInformation.sendingApplication.manufacturer = "Open Ech";
-		declaration.generalInformation.sendingApplication.product = "Open Ech - E-MWST";
-		declaration.generalInformation.sendingApplication.productVersion = "1.0.0";
-		declaration.generalInformation.generationTime = LocalDateTime.now();
+
+		declaration.setDefaultRates();
 		return declaration;
 	}
 	
@@ -45,7 +38,7 @@ public class NewVATDeclarationEditor extends Editor<VATDeclarationEditModel, VAT
 
 	@Override
 	protected VATDeclaration save(VATDeclarationEditModel declaration) {
-		return Backend.save(declaration.convertToModel());
+		return declaration.convertToModel();
 	}
 	
 	@Override

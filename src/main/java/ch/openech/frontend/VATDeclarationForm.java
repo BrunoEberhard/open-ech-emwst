@@ -35,11 +35,13 @@ public class VATDeclarationForm extends Form<VATDeclarationEditModel> {
 		addTitle("Steuerberechnung");
 		if (reportingMethod == FlatTaxRateMethod.class) {
 			line($.suppliesPerTaxRate0.taxRate, $.suppliesPerTaxRate0.turnover, $.suppliesPerTaxRate0.activity);
-			line($.suppliesPerTaxRate1.taxRate, $.suppliesPerTaxRate1.turnover, $.suppliesPerTaxRate1.activity);
-			line($.suppliesPerTaxRate2.taxRate, $.suppliesPerTaxRate2.turnover, $.suppliesPerTaxRate2.activity);
 		} else {
 			line($.suppliesPerTaxRate0.taxRate, $.suppliesPerTaxRate0.turnover);
 			// line($.suppliesPerTaxRate0.taxRate, $.suppliesPerTaxRate0.turnover, new TextFormElement($.suppliesPerTaxRate0.getResult()));
+			line($.suppliesPerTaxRate1.taxRate, $.suppliesPerTaxRate1.turnover);
+			if (reportingMethod == EffectiveReportingMethod.class) {
+				line($.suppliesPerTaxRate2.taxRate, $.suppliesPerTaxRate2.turnover);
+			}
 		}
 
 		addTitle(Resources.getString("AcquisitionTax"));

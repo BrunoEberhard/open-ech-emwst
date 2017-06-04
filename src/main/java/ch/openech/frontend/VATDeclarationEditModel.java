@@ -1,6 +1,8 @@
 package ch.openech.frontend;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.minimalj.model.Keys;
@@ -11,18 +13,22 @@ import org.minimalj.model.properties.Properties;
 import org.minimalj.model.properties.PropertyInterface;
 import org.minimalj.util.CloneHelper;
 import org.minimalj.util.StringUtils;
+import org.minimalj.util.mock.Mocking;
 
 import ch.openech.model.emwst.CompilationCompensationExport;
 import ch.openech.model.emwst.CompilationDeemedInputTaxDeduction;
 import ch.openech.model.emwst.CompilationMarginTaxation;
+import ch.openech.model.emwst.EffectiveReportingMethod;
+import ch.openech.model.emwst.FormOfReporting;
 import ch.openech.model.emwst.GeneralInformation;
 import ch.openech.model.emwst.GrossOrNet;
 import ch.openech.model.emwst.OtherFlowsOfFunds;
 import ch.openech.model.emwst.TurnoverComputation;
 import ch.openech.model.emwst.TurnoverTaxRate;
+import ch.openech.model.emwst.TypeOfSubmission;
 import ch.openech.model.emwst.VATDeclaration;
 
-public class VATDeclarationEditModel {
+public class VATDeclarationEditModel implements Mocking {
 	public static final VATDeclarationEditModel $ = Keys.of(VATDeclarationEditModel.class);
 	
 	public Object id;
@@ -154,4 +160,42 @@ public class VATDeclarationEditModel {
 		return vatDeclaration;
 	}
 
+	@Override
+	public void mock() {
+		setDefaultRates();
+
+		generalInformation.organisationName = "Demo AG";
+		generalInformation.businessReferenceId = "Open Ech Demo";
+		
+		generalInformation.sendingApplication.manufacturer = "Open Ech";
+		generalInformation.sendingApplication.product = "Open Ech - E-MWST";
+		generalInformation.sendingApplication.productVersion = "1.0.0";
+		generalInformation.generationTime = LocalDateTime.now();
+		
+		generalInformation.uid.mock();
+		
+		generalInformation.reportingPeriodFrom = LocalDate.now().withDayOfYear(1);
+		generalInformation.reportingPeriodTill = LocalDate.now().withMonth(12).withDayOfMonth(31);
+		generalInformation.formOfReporting = FormOfReporting.vereinnahmt;
+		generalInformation.typeOfSubmission = TypeOfSubmission.Ersteinreichung;
+	
+		turnoverComputation.totalConsideration = BigDecimal.valueOf(200 * 1000);
+		suppliesPerTaxRate0.turnover = BigDecimal.valueOf(200 * 1000);
+		suppliesPerTaxRate1.turnover = BigDecimal.ZERO;
+		suppliesPerTaxRate2.turnover = BigDecimal.ZERO;
+		
+		acquisitionTax0.taxRate = BigDecimal.ZERO;
+		acquisitionTax0.turnover = BigDecimal.ZERO;
+		
+		payableTax = suppliesPerTaxRate0.turnover.multiply(suppliesPerTaxRate0.taxRate).divide(BigDecimal.valueOf(100));
+	}
+	
+	public void setDefaultRates() {
+		if (clazz == EffectiveReportingMethod.class) {
+			suppliesPerTaxRate0.taxRate = BigDecimal.valueOf(8.0);
+			suppliesPerTaxRate1.taxRate = BigDecimal.valueOf(2.5);
+			suppliesPerTaxRate2.taxRate = BigDecimal.valueOf(3.8);
+		}
+	}
+	
 }

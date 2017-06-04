@@ -18,38 +18,34 @@
 */
 package ch.openech;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 import org.minimalj.application.Application;
-import org.minimalj.application.Configuration;
 import org.minimalj.frontend.action.Action;
 import org.minimalj.frontend.action.ActionGroup;
 import org.minimalj.frontend.impl.nanoserver.NanoWebServer;
-import org.minimalj.repository.memory.InMemoryRepository;
 
 import ch.openech.frontend.NewVATDeclarationEditor;
+import ch.openech.frontend.VATDeclarationXmlImport;
 import ch.openech.model.emwst.EffectiveReportingMethod;
 import ch.openech.model.emwst.FlatTaxRateMethod;
 import ch.openech.model.emwst.NetTaxRateMethod;
 import ch.openech.model.emwst.VATDeclaration;
 
 public class EmwstApplication extends Application {
-
-	public EmwstApplication() {
-		if (!Configuration.available("MjRepository")) {
-			Configuration.set("MjRepository", InMemoryRepository.class.getName());
-		}
-	}
 	
 	@Override
 	public List<Action> getNavigation() {
-		ActionGroup actions = new ActionGroup("E-MWST");
-		actions.add(new NewVATDeclarationEditor(EffectiveReportingMethod.class));
-		actions.add(new NewVATDeclarationEditor(NetTaxRateMethod.class));
-		actions.add(new NewVATDeclarationEditor(FlatTaxRateMethod.class));
+		ActionGroup newActions = new ActionGroup("Neu erstellen");
+		newActions.add(new NewVATDeclarationEditor(EffectiveReportingMethod.class));
+		newActions.add(new NewVATDeclarationEditor(NetTaxRateMethod.class));
+		newActions.add(new NewVATDeclarationEditor(FlatTaxRateMethod.class));
 
-		return Collections.singletonList(actions);
+		ActionGroup importActions = new ActionGroup("Import");
+		importActions.add(new VATDeclarationXmlImport());
+
+		return Arrays.asList(newActions, importActions);
 	}
 
 	@Override
