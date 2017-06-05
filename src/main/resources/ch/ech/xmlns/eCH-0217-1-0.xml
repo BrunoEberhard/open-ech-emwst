@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<eCH-0217:VATDeclaration xmlns:eCH-0217="http://www.ech.ch/xmlns/ech-0217/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ech.ch/xmlns/ech-0217/1 eCH-0217-1-0.xsd ">
+<eCH-0217:VATDeclaration xmlns:eCH-0217="http://www.ech.ch/xmlns/eCH-0217/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ech.ch/xmlns/eCH-0217/1 eCH-0217-1-0.xsd ">
   <eCH-0217:generalInformation>
     <eCH-0217:uid>
       <eCH-0217:uidOrganisationIdCategorie>CHE</eCH-0217:uidOrganisationIdCategorie>

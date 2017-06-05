@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by Lars Steffen (AWK Group AG) -->
-<xs:schema xmlns:eCH-0217="http://www.ech.ch/xmlns/ech-0217/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ech.ch/xmlns/ech-0217/1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+<xs:schema xmlns:eCH-0217="http://www.ech.ch/xmlns/eCH-0217/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ech.ch/xmlns/eCH-0217/1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
 	<xs:annotation>
 		<xs:documentation xml:lang="de">Spezifikation für die elektronische Einreichung von Mehrwertsteuer (MWST)-Abrechnungen im Portal ESTV SuisseTax</xs:documentation>
 		<xs:documentation xml:lang="fr">Spécification pour la remise électronique du décompte de la taxe sur la valeur ajoutée (TVA) sur le portail AFC SuisseTax</xs:documentation>
