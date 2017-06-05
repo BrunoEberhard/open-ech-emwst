@@ -1,12 +1,6 @@
-= Open-eCH: Elektronische Mehrwertsteuerabrechnung
+= Elektronische Mehrwertsteuerabrechnung
 
-== Screenshots
-
-image::EmwstApplication_Eingabe_reduced.png[]
-
-image::EmwstApplication_XML_reduced.png[]
-
-== Anwendung
+Eine Umsetzung des eCH 0217 Standards.
 
 Die Applikation richtet sich nicht an fachliche Benutzer. Das Formular zur Eingabe und Bearbeitung
 einer Abrechnung enthält alle Felder die in der XML-Datei enthalten sein können, aber es werden keine
@@ -14,6 +8,12 @@ speziellen Hilfen angeboten.
 
 Bei der Implementierung ging es mehr um die Validierung des XML-Standards von Ech. Die Umsetzung
 als Java Modell und der XML - Input / Output könnte jedoch für andere Anwendungen interessant sein.
+
+== Screenshots
+
+image::EmwstApplication_Eingabe_reduced.png[]
+
+image::EmwstApplication_XML_reduced.png[]
 
 == Technische Hinweise zu der Implementierung
 
