@@ -1,5 +1,13 @@
 = Open-eCH: Elektronische Mehrwertsteuerabrechnung
 
+== Screenshots
+
+image::EmwstApplication_Eingabe_reduced.png[]
+
+image::EmwstApplication_XML_reduced.png[]
+
+== Anwendung
+
 Die Applikation richtet sich nicht an fachliche Benutzer. Das Formular zur Eingabe und Bearbeitung
 einer Abrechnung enthält alle Felder die in der XML-Datei enthalten sein können, aber es werden keine
 speziellen Hilfen angeboten.
@@ -33,9 +41,3 @@ Einige Klassen werden aus der Register Applikation von Open-eCH verwendet.
 === Kontakt
 
 Bruno Eberhard, link:mailto:bruno.eberhard@pop.ch[mailto:bruno.eberhard@pop.ch] 
-
-== Screenshots
-
-image::EmwstApplication_Eingabe_reduced.png[]
-
-image::EmwstApplication_XML_reduced.png[]
