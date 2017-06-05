@@ -1,6 +1,7 @@
 = Elektronische Mehrwertsteuerabrechnung
 
-Eine Umsetzung des eCH 0217 Standards.
+Eine Umsetzung des eCH 0217 Standards. Es können Daten in ein Java Modell eingelesen oder
+von da geschrieben werden.
 
 Die Applikation richtet sich nicht an fachliche Benutzer. Das Formular zur Eingabe und Bearbeitung
 einer Abrechnung enthält alle Felder die in der XML-Datei enthalten sein können, aber es werden keine
@@ -28,15 +29,12 @@ Abhängigkeiten, sodass das ganze Projekt aus einer übersichtlich kleinen Anzah
 
 === Datenmodell
 
-Im package ch.openech.model.emwst befinden sich die Klassen die das Datenmodell repräsentieren. Die Namen der
+Im package link:src/main/java/ch/openech/model/emwst[ch.openech.model.emwst] befinden sich die Klassen die das Datenmodell repräsentieren. Die Namen der
 Klassen und der Felder entsprechen denen aus dem XML Schema des Standards.
 
-Daher konnte das Einlesen und Schreiben der XML Files sehr einfach gehalten werden. Die entsprechenden Reader/Writer
+Daher konnte das link:src/main/java/ch/openech/xml/read/StaxEch0217.java[Einlesen] und
+link:/src/main/java/ch/openech/xml/write/WriterEch0217.java[Schreiben] der XML Files sehr einfach gehalten werden. Die entsprechenden Reader/Writer
 finden sich in dem package ch.openech.xml .
-
-=== Open-eCH
-
-Einige Klassen werden aus der Register Applikation von Open-eCH verwendet.
 
 === Kontakt
 
