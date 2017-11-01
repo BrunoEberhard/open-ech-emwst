@@ -17,13 +17,10 @@ import static ch.openech.model.XmlConstants.INPUT_TAX_MATERIAL_AND_SERVICES;
 import static ch.openech.model.XmlConstants.INPUT_TAX_REDUCTIONS;
 import static ch.openech.model.XmlConstants.INVOICE_DATE;
 import static ch.openech.model.XmlConstants.INVOICE_NUMBER;
-import static ch.openech.model.XmlConstants.MANUFACTURER;
 import static ch.openech.model.XmlConstants.MARGIN_TAXATION;
 import static ch.openech.model.XmlConstants.OPTED;
 import static ch.openech.model.XmlConstants.ORGANISATION_NAME;
 import static ch.openech.model.XmlConstants.PAYABLE_TAX;
-import static ch.openech.model.XmlConstants.PRODUCT;
-import static ch.openech.model.XmlConstants.PRODUCT_VERSION;
 import static ch.openech.model.XmlConstants.REDUCTION_OF_CONSIDERATION;
 import static ch.openech.model.XmlConstants.REPORTING_PERIOD_FROM;
 import static ch.openech.model.XmlConstants.REPORTING_PERIOD_TILL;
@@ -39,8 +36,6 @@ import static ch.openech.model.XmlConstants.TRANSFER_NOTIFICATION_PROCEDURE;
 import static ch.openech.model.XmlConstants.TURNOVER;
 import static ch.openech.model.XmlConstants.TYPE_OF_SERVICE;
 import static ch.openech.model.XmlConstants.TYPE_OF_SUBMISSION;
-import static ch.openech.model.XmlConstants.UID_ORGANISATION_ID;
-import static ch.openech.model.XmlConstants.UID_ORGANISATION_ID_CATEGORIE;
 import static ch.openech.model.XmlConstants._V_A_T_DECLARATION;
 
 import java.io.StringWriter;
@@ -49,6 +44,7 @@ import java.util.List;
 
 import org.minimalj.util.StringUtils;
 
+import ch.openech.model.XmlConstants;
 import ch.openech.model.emwst.CompilationCompensationExport;
 import ch.openech.model.emwst.CompilationDeemedInputTaxDeduction;
 import ch.openech.model.emwst.CompilationMarginTaxation;
@@ -57,7 +53,6 @@ import ch.openech.model.emwst.FlatTaxRateMethod;
 import ch.openech.model.emwst.GeneralInformation;
 import ch.openech.model.emwst.NetTaxRateMethod;
 import ch.openech.model.emwst.OtherFlowsOfFunds;
-import ch.openech.model.emwst.SendingApplication;
 import ch.openech.model.emwst.TurnoverComputation;
 import ch.openech.model.emwst.TurnoverTaxRate;
 import ch.openech.model.emwst.VATDeclaration;
@@ -65,16 +60,19 @@ import ch.openech.model.emwst.VariousDeduction;
 import ch.openech.model.emwst.VerificationCompensationExport;
 import ch.openech.model.emwst.VerificationDeemedInputTaxDeduction;
 import ch.openech.model.emwst.VerificationMarginTaxation;
-import ch.openech.model.organisation.UidStructure;
 
 public class WriterEch0217 extends WriterElement {
 
 	protected final EchSchema context;
 	public final String URI;
+	private final WriterEch0097 ech97;
+	private final WriterEch0058 ech58;
 	
 	public WriterEch0217(Writer writer, EchSchema context) {
 		super(writer, context.getNamespaceURI(217));
 		this.context = context;
+		this.ech97 = new WriterEch0097(context);
+		this.ech58 = new WriterEch0058(context);
 		URI = context.getNamespaceURI(217);
 	}
 	
@@ -103,22 +101,7 @@ public class WriterEch0217 extends WriterElement {
 	}
 	
 	// In der Reihenfolge vom xsd
-	
-	public void uidStructure(WriterElement parent, UidStructure uid) throws Exception {
-		if (uid != null && uid.value != null && uid.value.length() == UidStructure.LENGTH) {
-			WriterElement w = parent.create(URI, "uid");
-			w.text(UID_ORGANISATION_ID_CATEGORIE, uid.value.substring(0, 3)); // TYPO by schema
-			w.text(UID_ORGANISATION_ID, uid.value.substring(3));
-		}
-    }
-	
-	private void sendingApplication(WriterElement parent, SendingApplication sendingApplication) throws Exception {
-		if (sendingApplication != null) {
-			WriterElement w = create(parent, sendingApplication);
-			w.values(sendingApplication, MANUFACTURER, PRODUCT, PRODUCT_VERSION);
-		}
-	}
-	
+
 	private void variousDeduction(WriterElement parent, VariousDeduction variousDeduction) throws Exception {
 		if (variousDeduction != null) {
 			WriterElement w = create(parent, variousDeduction);
@@ -193,10 +176,10 @@ public class WriterEch0217 extends WriterElement {
 	private void generalInformation(WriterElement parent, GeneralInformation generalInformation) throws Exception {
 		if (generalInformation != null) {
 			WriterElement w = create(parent, generalInformation);
-			uidStructure(w, generalInformation.uid);
+			ech97.uidStructure(w, XmlConstants.UID, generalInformation.uid);
 			w.values(generalInformation, ORGANISATION_NAME, GENERATION_TIME, REPORTING_PERIOD_FROM, REPORTING_PERIOD_TILL);
 			w.values(generalInformation, TYPE_OF_SUBMISSION, FORM_OF_REPORTING, BUSINESS_REFERENCE_ID);
-			sendingApplication(w, generalInformation.sendingApplication);
+			ech58.sendingApplication(w, generalInformation.sendingApplication);
 		}
 	}
 

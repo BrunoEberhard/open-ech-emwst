@@ -5,9 +5,9 @@ import static ch.openech.frontend.VATDeclarationEditModel.$;
 import org.minimalj.frontend.form.Form;
 import org.minimalj.util.resources.Resources;
 
+import ch.openech.model.SendingApplication;
 import ch.openech.model.emwst.EffectiveReportingMethod;
 import ch.openech.model.emwst.FlatTaxRateMethod;
-import ch.openech.model.emwst.SendingApplication;
 
 public class VATDeclarationForm extends Form<VATDeclarationEditModel> {
 

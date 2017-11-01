@@ -7,6 +7,7 @@ import org.minimalj.model.Keys;
 import org.minimalj.model.annotation.NotEmpty;
 import org.minimalj.model.annotation.Size;
 
+import ch.openech.model.SendingApplication;
 import ch.openech.model.organisation.UidStructure;
 
 public class GeneralInformation {
