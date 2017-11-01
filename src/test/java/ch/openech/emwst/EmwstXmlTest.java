@@ -3,6 +3,7 @@ package ch.openech.emwst;
 import java.io.InputStream;
 import java.io.StringWriter;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import ch.openech.model.EchSchemaValidation;
@@ -20,8 +21,8 @@ public class EmwstXmlTest {
 		VATDeclaration declaration = reader.process(stream);
 		
 		String output = writeToString(declaration);
-		System.out.println(output);
-		System.out.println(EchSchemaValidation.validate(output));
+		// System.out.println(output);
+		Assert.assertEquals(EchSchemaValidation.OK, EchSchemaValidation.validate(output));
 	}
 
 	
