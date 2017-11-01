@@ -10,10 +10,10 @@ import org.minimalj.model.annotation.Size;
 public class VerificationCompensationExport {
 	public static VerificationCompensationExport $ = Keys.of(VerificationCompensationExport.class);
 	
-	@Size(255)
+	@Size(80)
 	public String invoiceNumber;
 	public LocalDate invoiceDate;
-	@Size(255)
+	@Size(100)
 	public String typeOfService;
 	@Size(5) @Decimal(2)
 	public String taxRate;

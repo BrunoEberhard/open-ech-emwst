@@ -12,7 +12,7 @@ public class VariousDeduction {
 
 	@NotEmpty @Size(18) @Decimal(2)
 	public BigDecimal amountVariousDeduction;
-	@Size(255) @NotEmpty
+	@Size(50) @NotEmpty
 	public String descriptionVariousDeduction;
 
 	

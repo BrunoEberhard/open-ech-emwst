@@ -12,7 +12,7 @@ public class TurnoverTaxRate {
 	public static final TurnoverTaxRate $ = Keys.of(TurnoverTaxRate.class);
 	
 	// only used in FlatTaxRateMethod
-	@Size(255) @NotEmpty
+	@Size(100) @NotEmpty
 	public String activity;
 	
 	@Size(5) @Decimal(2) @NotEmpty
